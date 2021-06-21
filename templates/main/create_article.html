@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<h3 class="mt-3" style="text-align: center;"> Create New Article</h3>
+<br>
+{% if success %}
+<p> Form Submitted Successfully </p>
+{% endif %}
+<form method="Post" style="text-align: center;">
+{% csrf_token %}
+<input type="text" name="title" aria-label="Title" placeholder="Title" style="width: 50%; margin: 0 auto;" class="form-control"/>
+<br>
+<textarea name="content" placeholder="Content" style="width: 50%; margin: 0 auto;" id="floatingTextarea2" class="form-control"></textarea>
+<br>
+<select name="author" class="form-select" id="autoSizingSelect" style="width: 50%; margin: 0 auto;"> 
+{% for author in authors %}
+<option selected>Choose...</option>
+<option value= "{{author.id}}"> {{author.name}}</option>
+{% endfor %}
+</select>
+<br>
+<button type="submit" class="btn btn-outline-success">Submit</button>
+<button type="reset" class="btn btn-outline-success">Reset</button>
+</form>
+
+
+{% endblock content %}

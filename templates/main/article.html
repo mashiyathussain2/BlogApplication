@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class ="container">
+<div class="row">
+<h1 class="mt-4"> {{article.title}} </h1>
+<p class="text-muted" style="margin:0">{{article.createdAt}}</p>
+<p class="text-muted">Written By: 
+{% for author in article.authors.all %}
+<a style="color: #437A16;" href="{% url 'get_author' author.id %}">
+{{author}},
+</a>
+{% endfor %}
+</p>
+<p style="font-family: -apple-system, BlinkMacSystemFont, sans-serif;">
+{{article.content}}
+</p>
+
+</div>
+</div>
+{% endblock content %}

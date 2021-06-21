@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="container">
+<div class="row">
+<h1 class="mt-4"> {{author.name}}</h1>
+<h5> Articles Written  </h5>
+<ul class="list-group list-group-flush">
+{% for article in author.article_set.all %}
+<li class="list-group-item" style="margin: 0 0 3px 0; background: white; width:50%;">
+<a class="text-muted" style="font-size:20px; " href="{% url 'get_article' article.id %}">
+{{article}}
+</a>
+</li>
+{% endfor %}
+</ul>
+
+</div>
+</div>
+{% endblock content %}

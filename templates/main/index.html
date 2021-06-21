@@ -1,0 +1,54 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class ="container">
+<h1 style="text-align:center;">Welcome</h1>
+<div class="row">
+<div class="col">
+<h5><u>Top Articles </u></h5>
+<ul>
+{% for article in latest_articles%}
+<li> 
+<blockquote class="blockquote">
+<a href= "{% url 'get_article' article.id %}">
+{{article}} 
+</a> 
+</blockquote>
+
+<figcaption class="blockquote-footer">
+<cite title="Written By">
+By {% for author in article.authors.all %}
+<a href="{% url 'get_author' author.id %}">
+{{author}},
+</a>
+{% endfor %}
+</cite>
+  </figcaption>
+</li>
+{% endfor %}
+</ul>
+</div>
+</div>
+
+<br>
+<h5><u>Another Articles </u></h5>
+{% for article in latest_articles%}
+
+<div class="card h-100 text-dark bg-light mb-3" style="width: 18rem; display:inline-block; border-radius: 5%; border: 1px solid #000000;">
+  <div class="card-body">
+  <h5 class="card-title">{{ article.title }}</h5>
+  {% for author in article.authors.all %}
+  <h6 class="card-subtitle mb-2">
+  <cite><a class="text-muted" style="font-size:13px;" href="{% url 'get_author' author.id %}">
+{{author}}
+</a></cite></h6>
+  {% endfor %}
+  <p class="card-text">{{ author }}</p>
+  <p class="card-text">{{article.content |slice:":100" }}...<a href="{% url 'get_article' article.id %}" class="card-link">Read More</a></p> 
+  <!--<a href="#" class="card-link">Card link</a>-->
+  </div>
+</div>
+
+{% endfor %}
+
+</div>
+{% endblock content %}
